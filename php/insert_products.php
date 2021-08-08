@@ -52,9 +52,9 @@
                         include_once("config_productos.php");
                         include_once("conect_database.php");
 
-                        $sql="select id_diciplina as id, descripcion as descripcion from discplina order by descripcion";
-
                         $conn=new db();
+
+                        $sql="select id_disciplina as id, descripcion as descripcion from discplina order by descripcion";
 
                         $result=$conn->query($sql);
 
@@ -77,23 +77,21 @@
 
                     <?php 
 
-                        include_once("config_productos.php");
-                        include_once("conect_database.php");
+                        #include_once("config_productos.php");
+                        #include_once("conect_database.php");
 
-                        $sql2="select id_marca as id, descripcion as descripcion from marcas order by descripcion";
+                        $sql2="select id_marca as id, descripcion as descripcion from marcas order by descripcion;";
 
-                        $conn2=new db();
+                        $result=$conn->query($sql2);
 
-                        $result_Marcas=$conn2->query($sql2);
+                        while($row=$result->fetch_assoc()){
+                    ?>            
 
-                        while($row_Marcas=$result_Marcas->fetch_assoc()){
-                        ?>
+                        <option value="<?php echo $row["id"] ?>"> <?php echo $row["descripcion"] ?></option>
 
-                    <option value=" <?php echo $row_Marcas["id"] ?>"><?php echo $row_Marcas["descripcion"] ?></option>
-                
-                    <?php 
-                        }
-                    ?>
+                    <?php
+                        }  
+                    ?>   
                 </select>
             </div>
             
