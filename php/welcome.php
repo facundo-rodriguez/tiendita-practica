@@ -30,6 +30,8 @@
         ?>
 
         <a href="insert_products.php" role="button">ingresar productos</a>
+        <a href="../cambiar_usuario.html" role="button">modificar el usuario</a>
+
     </div>
 
 </body>

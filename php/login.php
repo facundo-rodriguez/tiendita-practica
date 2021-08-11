@@ -50,7 +50,7 @@ if($row==NULL){
 
     <div>
         
-        <a href="index.html">x</a>
+        <a href="../index.php">x</a>
         
         <div>
             <h1>¡¡ERROR!! MAXIMA CANTIDAD DE INTENTOS</h1>

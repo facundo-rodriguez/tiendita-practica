@@ -27,35 +27,19 @@
 
         if($stmt->execute()){
         
-        ?>
-
+    ?>
             <script>
 
-                    alert("Producto ingresado: " + " <?php echo $modelo ?>");
-                    window.location="insert_products.php";
+                alert("se ingreso el producto: " + "<?php echo $modelo ?>");
 
+                window.location="insert_products.php";
 
-            /*
-                let sure=prompt("¿seguro que quiere ingresae este producto? si/no");
+            </script>  
 
-                if(sure =="si" || sure=="SI")){
-                    
-                    alert("Producto ingresado: " + " #echo $modelo ?>");
-                    window.location="insert_products.php";
-
-                }else{
-
-
-                    alert("El procuto no se ingreso");
-                    window.location="insert_products.php";
-
-                }
-                */
-                
-            </script>
-
-        <?php 
-        }
+<?php 
+        
     }
-        ?>
+        
+}
+?>
 

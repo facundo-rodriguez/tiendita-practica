@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,16 +14,16 @@
     </div>
 
     <div class="formulario">
-        <form action="save_products.php" method="post">
+        <form action="save_products.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
            
             <div> 
                 <label for="modelo" class="control-label">MODELO</label>
-                <input type="text" id="modelo" name="modelo" require="" placeholder="MODELO">
+                <input type="text" id="modelo" name="modelo" required="" placeholder="MODELO">
             </div>
 
             <div>
                 <label for="precio" class="control-label">PRECIO</label>
-                <input type="text" id="precio" name="precio" require="" placeholder="PRECIO">
+                <input type="text" id="precio" name="precio" required="" placeholder="PRECIO">
             </div>
            
             <div>
@@ -43,8 +43,6 @@
             </div>
 
             <div>
-
-            
                 <label for="disciplina" class="control-label">DISCIPLINA</label>
                 <select name="disciplina" id="">
                     <?php
@@ -70,7 +68,6 @@
             </div>
 
             <div>
-
                 <label for="marcas" class="control-label">MARCAS</label>
 
                 <select name="marcas" id="">
@@ -108,6 +105,92 @@
     </div>
 
 
+    <div>
+        <h3>ingrese los colores</h3>
+    </div>                    
+                    
+    <div class="formulario-colores">
+
+        <form action="insert_colores.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                
+             <label for="modelo">Modelo</label>
+             <select name="modelo" id="">
+                
+                <?php 
+                
+                   $sql3="select id_zapatilla as id, modelo as modelo from zapatillas order by modelo"; 
+                   $result=$conn->query($sql3);
+                   
+                   while($row=$result->fetch_assoc()){
+                ?>    
+                        <option value="<?php echo $row["id"] ?>"> <?php echo $row["modelo"] ?> </option>
+                
+                <?php 
+                   }
+                ?>  
+
+             </select>               
+
+             <label for="colores">Colores</label>
+             <select name="colores" id="">
+
+                <?php 
+
+                    $sql4="select id_color as id, descripcion as descripcion from colores order by descripcion";
+                    $result=$conn->query($sql4);
+
+                    while($row=$result->fetch_assoc()){
+                ?>        
+                        <option value="<?php echo $row["id"] ?>"> <?php echo $row["descripcion"] ?> </option>
+
+                <?php   
+                 }
+                ?>
+
+             </select>
+
+             <div>
+
+                 <input type="submit" value="añadir color">
+
+             </div>
+        </form>
+       
+    </div>
+
+    <div>
+        <h3>eliminar productos</h3>
+    </div>
+
+    <div class="formulario-eliminar">
+
+        <form action="delete.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+            <label for="modelo">Modelo</label>
+            <select name="modelo" id="">
+                
+                <?php 
+                
+                   $sql5="select id_zapatilla as id, modelo as modelo from zapatillas order by modelo"; 
+                   $result=$conn->query($sql5);
+                   
+                   while($row=$result->fetch_assoc()){
+                ?>    
+                        <option value="<?php echo $row["id"] ?>"> <?php echo $row["modelo"] ?> </option>
+                
+                <?php 
+                   }
+                ?>  
+
+            </select> 
+            
+            <input type="submit" value="eliminar producto">
+
+        </form>
+
+        
+
+    </div>
 
 </body>
 </html>
