@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-08-2021 a las 22:41:35
+-- Tiempo de generación: 18-08-2021 a las 22:45:41
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -58,6 +58,16 @@ CREATE TABLE `colores_zapatillas` (
   `id_zapatilla` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `colores_zapatillas`
+--
+
+INSERT INTO `colores_zapatillas` (`id_color`, `id_zapatilla`) VALUES
+(1, 25),
+(5, 25),
+(7, 25),
+(7, 26);
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +114,28 @@ INSERT INTO `marcas` (`id_marca`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `talles`
+--
+
+CREATE TABLE `talles` (
+  `id_talle` int(11) NOT NULL,
+  `descripcion` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `talles_zapatillas`
+--
+
+CREATE TABLE `talles_zapatillas` (
+  `id_talle` int(11) NOT NULL,
+  `id_zapatilla` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `zapatillas`
 --
 
@@ -124,13 +156,8 @@ CREATE TABLE `zapatillas` (
 --
 
 INSERT INTO `zapatillas` (`id_zapatilla`, `modelo`, `precio`, `genero`, `id_marca`, `fecha_alta`, `imagen`, `descripcion`, `id_disciplina`) VALUES
-(21, 'la adidas re piola', '5668.00', 'hombre', 2, '2021-08-08 07:52:45', 'images/', 'las de lio ;)', 2),
-(22, 'la fila 2020', '6900.00', 'niÃ±o', 4, '2021-08-08 08:32:08', 'images/Fila_Revolution.jpg', ' jaja', 3),
-(23, 'le revolucion', '9021.00', 'mujer', 5, '2021-08-08 09:11:23', 'images/', 'hola q tal', 2),
-(24, 'le revolucion', '7523.00', 'mujer', 6, '2021-08-08 19:59:16', 'images/', 'lala', 2),
-(25, 'la fila 2020', '4500.00', 'mujer', 4, '2021-08-08 20:02:31', 'images/', 'gga', 3),
-(26, 'la nike re piola', '9021.00', 'niÃ±os', 1, '2021-08-08 20:26:19', 'images/', 'tata', 2),
-(27, 'la nike re piola', '4500.00', 'niÃ±os', 1, '2021-08-08 20:40:44', 'images/', 'niÃ±os de la niÃ±ez', 3);
+(25, 'nike 2021', '5668.00', 'mujer', 2, '2021-08-18 20:34:17', 'images/Nike_Downshifter_7.jpg', '', 2),
+(26, 'adidas 2021', '6900.00', 'niños', 2, '2021-08-18 20:37:21', 'images/Adidas_10K.jpg', '', 2);
 
 --
 -- Índices para tablas volcadas
@@ -160,6 +187,19 @@ ALTER TABLE `discplina`
 --
 ALTER TABLE `marcas`
   ADD PRIMARY KEY (`id_marca`);
+
+--
+-- Indices de la tabla `talles`
+--
+ALTER TABLE `talles`
+  ADD PRIMARY KEY (`id_talle`);
+
+--
+-- Indices de la tabla `talles_zapatillas`
+--
+ALTER TABLE `talles_zapatillas`
+  ADD PRIMARY KEY (`id_talle`,`id_zapatilla`),
+  ADD KEY `fk_zapatilla` (`id_zapatilla`);
 
 --
 -- Indices de la tabla `zapatillas`
@@ -192,10 +232,16 @@ ALTER TABLE `marcas`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `talles`
+--
+ALTER TABLE `talles`
+  MODIFY `id_talle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `zapatillas`
 --
 ALTER TABLE `zapatillas`
-  MODIFY `id_zapatilla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_zapatilla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restricciones para tablas volcadas
@@ -207,6 +253,13 @@ ALTER TABLE `zapatillas`
 ALTER TABLE `colores_zapatillas`
   ADD CONSTRAINT `colores_zapatillas` FOREIGN KEY (`id_zapatilla`) REFERENCES `zapatillas` (`id_zapatilla`),
   ADD CONSTRAINT `zapatillas_colores` FOREIGN KEY (`id_color`) REFERENCES `colores` (`id_color`);
+
+--
+-- Filtros para la tabla `talles_zapatillas`
+--
+ALTER TABLE `talles_zapatillas`
+  ADD CONSTRAINT `fk_talle` FOREIGN KEY (`id_talle`) REFERENCES `talles` (`id_talle`),
+  ADD CONSTRAINT `fk_zapatilla` FOREIGN KEY (`id_zapatilla`) REFERENCES `zapatillas` (`id_zapatilla`);
 
 --
 -- Filtros para la tabla `zapatillas`

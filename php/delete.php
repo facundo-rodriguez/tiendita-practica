@@ -9,13 +9,16 @@ if($_SESSION["logueado"]){
 
     $modelo=$_POST["modelo"];
 
-    $sql="delete from zapatillas where id_zapatilla=".$modelo;
-
     $sql2="delete from colores_zapatillas where id_zapatilla=".$modelo;
 
+    $sql="delete from zapatillas where id_zapatilla=".$modelo;
+
+   
+
     $conn=new db();
-    $result=$conn->query($sql);
     $result=$conn->query($sql2);
+    $result=$conn->query($sql);
+   
 
     header("location:insert_products.php");
 }

@@ -27,6 +27,8 @@ class db{
     public function __construct(){
 
         $this->conexion=new mysqli(SERVER_NAME,USER_NAME,PASSWORD,DATABASE_NAME);
+
+        $this->conexion->set_charset("utf8mb4");
    
         if($this->conexion->connect_errno){
 

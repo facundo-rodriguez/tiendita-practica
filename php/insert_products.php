@@ -150,10 +150,88 @@
              </select>
 
              <div>
-
-                 <input type="submit" value="añadir color">
-
+                 <input type="submit" name="añadir-color" value="añadir color">
              </div>
+
+             <div>
+                 <h3>eliminar color del producto</h3>
+             </div>
+
+                <div>
+                  <label for="modelo-color">elija el modelo</label>
+
+                  <select name="modelo-color" id="modelo-color">
+
+                    <?php
+                    
+                        $result=$conn->query($sql3);
+
+                        while($row=$result->fetch_assoc()){
+
+                    ?>
+
+                             <option value="<?php echo $row['id']?>"><?php echo $row['modelo']?></option>
+
+                    <?php
+                     
+                        }
+                    ?>
+
+                 </select>
+                    
+                  <label for="color-modelo">elija el color</label>
+                  <select name="color-modelo" id="color-modelo" >
+
+                    <option value="" id="">Seleccione</option>
+
+                  </select>
+
+                </div>
+                <div><input type="submit" value="eliminar color del producto" name="CM-delete"></div>
+
+            <div>
+                <h3>ingrese mas colores para elegir</h3>
+            </div>
+
+            <div>
+                <label for="mas-colores">Escriba el color</label>
+                <input type="text" name="mas-colores">
+            </div>
+                 
+            <div>
+                <input type="submit" name="lista-color" value="agregar">
+            </div>
+
+            <div>
+                <h3>Eliminar color de la lista</h3>
+            </div>
+
+            <div>
+                <label for="color">elija el color a eliminar</label>
+            
+                 <select name="color" id="">
+
+                 <?php
+
+                    $sql6="select id_color as id, descripcion as descripcion from colores";
+                    $result=$conn->query($sql6);
+
+                    while($row=$result->fetch_assoc()){                    
+                 ?>
+
+                        <option value="<?php echo $row['id'] ?>"> <?php echo $row['descripcion'] ?> </option>
+
+                 <?php
+                    }
+                 ?>
+                 </select>
+
+            </div>
+
+            <div>
+                <input type="submit" name="delete-color" value="borrar color de la lista">
+            </div>
+
         </form>
        
     </div>
@@ -171,8 +249,8 @@
                 
                 <?php 
                 
-                   $sql5="select id_zapatilla as id, modelo as modelo from zapatillas order by modelo"; 
-                   $result=$conn->query($sql5);
+                   $sql7="select id_zapatilla as id, modelo as modelo from zapatillas order by modelo"; 
+                   $result=$conn->query($sql7);
                    
                    while($row=$result->fetch_assoc()){
                 ?>    
@@ -188,9 +266,49 @@
 
         </form>
 
-        
-
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+
+$(document).ready(function(){
+
+var color_modelo=$("#color-modelo");
+
+$("#modelo-color").change(function(){
+
+    var modelo_color=$(this).val();
+
+    if(modelo_color !==''){
+
+
+        $.ajax({
+
+            data:{modelo_color:modelo_color},
+
+            dataType:'html',
+
+            type:'POST',
+
+            url:'select_colores.php'
+
+        }).done(function(data){
+
+            color_modelo.html(data);
+            color_modelo.prop('disabled',false);
+        });
+    }
+    else{
+
+        color_modelo.val('');
+        color_modelo.prop('disabled',true);
+    }
+});
+
+});
+
+
+    </script>
 </body>
 </html>
